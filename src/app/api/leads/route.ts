@@ -73,6 +73,7 @@ export async function POST(request: NextRequest) {
     })
     .returning({ id: leads.id });
 
+  console.log("[FCM] Triggering NewLead notification...");
   sendNewLeadNotification(lead.id, fullName, positionApplyingFor).catch((e) => console.error("FCM error:", e));
 
   return success({ id: lead.id }, 201);

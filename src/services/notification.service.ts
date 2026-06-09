@@ -25,7 +25,10 @@ export async function sendNewLeadNotification(
     .from(fcmTokens)
     .where(eq(fcmTokens.active, true));
 
-  if (tokens.length === 0) return;
+  if (tokens.length === 0) {
+    console.log("[FCM] NewLead: no active tokens — skipped");
+    return;
+  }
 
   const app = getFirebaseApp();
   const messaging = getMessaging(app);
@@ -52,19 +55,23 @@ export async function sendNewLeadNotification(
     },
   }));
 
+  console.log(`[FCM] NewLead: sending to ${tokens.length} tokens...`);
   const results = await messaging.sendEach(messages);
+  console.log(`[FCM] NewLead: ${results.successCount} success, ${results.failureCount} failed`);
 
   for (let i = 0; i < results.responses.length; i++) {
     const error = results.responses[i].error;
-    if (
-      error &&
-      (error.code?.includes('registration-token-not-registered') ||
-        error.code?.includes('invalid-registration-token'))
-    ) {
-      await db
-        .update(fcmTokens)
-        .set({ active: false })
-        .where(eq(fcmTokens.id, tokens[i].id));
+    if (error) {
+      console.log(`[FCM] NewLead token ${i} error:`, error.code);
+      if (
+        error.code?.includes('registration-token-not-registered') ||
+        error.code?.includes('invalid-registration-token')
+      ) {
+        await db
+          .update(fcmTokens)
+          .set({ active: false })
+          .where(eq(fcmTokens.id, tokens[i].id));
+      }
     }
   }
 }
@@ -79,7 +86,10 @@ export async function sendResumeUploadNotification(
     .from(fcmTokens)
     .where(eq(fcmTokens.active, true));
 
-  if (tokens.length === 0) return;
+  if (tokens.length === 0) {
+    console.log("[FCM] Resume: no active tokens — skipped");
+    return;
+  }
 
   const app = getFirebaseApp();
   const messaging = getMessaging(app);
@@ -106,19 +116,23 @@ export async function sendResumeUploadNotification(
     },
   }));
 
+  console.log(`[FCM] Resume: sending to ${tokens.length} tokens...`);
   const results = await messaging.sendEach(messages);
+  console.log(`[FCM] Resume: ${results.successCount} success, ${results.failureCount} failed`);
 
   for (let i = 0; i < results.responses.length; i++) {
     const error = results.responses[i].error;
-    if (
-      error &&
-      (error.code?.includes('registration-token-not-registered') ||
-        error.code?.includes('invalid-registration-token'))
-    ) {
-      await db
-        .update(fcmTokens)
-        .set({ active: false })
-        .where(eq(fcmTokens.id, tokens[i].id));
+    if (error) {
+      console.log(`[FCM] Resume token ${i} error:`, error.code);
+      if (
+        error.code?.includes('registration-token-not-registered') ||
+        error.code?.includes('invalid-registration-token')
+      ) {
+        await db
+          .update(fcmTokens)
+          .set({ active: false })
+          .where(eq(fcmTokens.id, tokens[i].id));
+      }
     }
   }
 }
