@@ -6,11 +6,13 @@ import { leads, leadEvents } from '@/db/schema';
 import { eq } from 'drizzle-orm';
 
 const s3 = new S3Client({
-  region: process.env.S3_REGION!,
+  region: process.env.S3_REGION || 'auto',
+  endpoint: process.env.AWS_ENDPOINT_URL_S3,
   credentials: {
     accessKeyId: process.env.S3_ACCESS_KEY_ID!,
     secretAccessKey: process.env.S3_SECRET_ACCESS_KEY!,
   },
+  forcePathStyle: true,
 });
 
 const BUCKET = process.env.AWS_S3_BUCKET!;

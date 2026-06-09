@@ -22,7 +22,7 @@
 
 * { margin: 0; padding: 0; box-sizing: border-box; }
 
-html { scroll-behavior: smooth; }
+/* smooth scroll removed — caused flicker with sticky header on mobile */
 
 body {
   background: var(--bg);
@@ -735,6 +735,8 @@ body {
   min-height: 100dvh;
   background: var(--bg);
   color: var(--text);
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
 }
 
 .privacy-header {
@@ -749,6 +751,7 @@ body {
   top: 0;
   z-index: 10;
   background: var(--bg);
+  will-change: transform;
 }
 
 @media (max-width: 1023px) {
