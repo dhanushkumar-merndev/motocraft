@@ -755,6 +755,9 @@ body {
   .privacy-header {
     padding: 10px 16px !important;
   }
+  .privacy-logo {
+    height: 28px !important;
+  }
 }
 
 .privacy-back {

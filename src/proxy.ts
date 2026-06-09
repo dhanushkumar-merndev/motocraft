@@ -4,6 +4,7 @@ import type { NextRequest } from 'next/server';
 const ALLOWED_ORIGINS = [
   'http://localhost:3000',
   'http://192.168.1.10:3000',
+  'https://motocraft.netlify.app',
 ];
 
 export function proxy(request: NextRequest) {

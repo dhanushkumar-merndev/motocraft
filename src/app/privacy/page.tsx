@@ -10,58 +10,22 @@ export const metadata: Metadata = {
 
 export default function PrivacyPolicy() {
   return (
-    <div
-      style={{
-        minHeight: "100dvh",
-        background: "#000",
-        color: "#F8F8F6",
-        fontFamily: "system-ui, -apple-system, sans-serif",
-      }}
-    >
+    <div className="privacy-root">
       {/* Header */}
       <header
-        style={{
-          borderBottom: "1px solid #6A5431",
-          padding: "20px 24px",
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "space-between",
-          maxWidth: 800,
-          margin: "0 auto",
-        }}
+        className="privacy-header"
+        style={{ justifyContent: "space-between" }}
       >
-        <Link
-          href="/"
-          style={{
-            color: "#D5B47D",
-            textDecoration: "none",
-            fontSize: "0.85rem",
-            fontWeight: 500,
-            padding: "8px 16px",
-            borderRadius: 8,
-            border: "1px solid #6A5431",
-            transition: "all 0.2s ease",
-            display: "flex",
-            alignItems: "center",
-            gap: "4px",
-          }}
-        >
+        <Link href="/" className="privacy-back">
           <IoChevronBack style={{ fontSize: "1rem" }} /> Back
         </Link>  
         <Link href="/" style={{ display: "flex", alignItems: "center", textDecoration: "none" }}>
-          <img src="/icon-foreground.png" alt="MotoCraft" style={{ height: 36 }} />
+          <img src="/icon-foreground.png" alt="MotoCraft" className="privacy-logo" style={{ height: 36 }} />
         </Link>
       </header>
 
       {/* Content */}
-      <main
-        style={{
-          maxWidth: 800,
-          margin: "0 auto",
-          padding: "40px 24px 80px",
-          lineHeight: 1.7,
-        }}
-      >
+      <main className="privacy-content">
         <h1
           style={{
             fontSize: "1.8rem",
