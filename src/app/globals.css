@@ -271,7 +271,7 @@ body {
   align-items: center;
   justify-content: center;
   min-height: 100dvh;
-  padding: 24px 12px;
+  padding: 24px 12px 12px;
   overflow-y: auto;
   background: var(--bg);
   /* Subtle radial glow from top */
@@ -562,7 +562,7 @@ body {
   /* Form panel right */
   .form-panel {
     justify-content: center;
-    padding: 60px 80px;
+    padding: 60px 30px;
     background-image: none;
   }
 
@@ -754,9 +754,14 @@ body {
   will-change: transform;
 }
 
+.privacy-logo {
+  height: 36px;
+  width: auto;
+}
+
 @media (max-width: 1023px) {
   .privacy-header {
-    padding: 10px 16px !important;
+    padding: 12px 16px !important;
   }
   .privacy-logo {
     height: 28px !important;
@@ -785,12 +790,12 @@ body {
 .privacy-content {
   max-width: 820px;
   margin: 0 auto;
-  padding: 40px 24px 80px;
+  padding: 40px 24px 40px;
   line-height: 1.75;
   font-size: 0.9rem;
 }
 
-.privacy-section { margin-bottom: 36px; }
+.privacy-section { margin-bottom: 6px; }
 .privacy-section h2 { font-size: 1rem; font-weight: 600; color: var(--text-muted); margin-bottom: 12px; text-transform: uppercase; letter-spacing: 0.04em; }
 .privacy-section p, .privacy-section li { color: rgba(245,242,238,0.7); }
 .privacy-section ul { padding-left: 20px; margin-top: 10px; display: flex; flex-direction: column; gap: 6px; }
@@ -805,7 +810,7 @@ body {
 
 @media (max-width: 1023px) {
   .privacy-content {
-    padding: 56px 16px 60px !important;
+    padding: 56px 16px 30px !important;
   }
 }
 

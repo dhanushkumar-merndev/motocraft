@@ -6,7 +6,11 @@ export const viewport: Viewport = {
 };
 
 export const metadata: Metadata = {
-  metadataBase: new URL('https://motocraft.netlify.app'),
+  metadataBase: new URL(
+    process.env.VERCEL_URL
+      ? `https://${process.env.VERCEL_URL}`
+      : 'http://localhost:3000'
+  ),
   title: "MotoCraft Careers",
   description: "Apply for career opportunities at MotoCraft",
   icons: {
@@ -30,9 +34,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className="h-full antialiased" data-scroll-behavior="smooth">
-      <body className="min-h-full flex flex-col" style={{ background: "#080808", color: "#F5F2EE" }}>
-        <link rel="preload" as="image" href="/icon.png" />
-        <link rel="preload" as="image" href="/logo.png" />
+      <body className="min-h-full flex flex-col" style={{ background: "#080808", color: "#F5F2EE" }} suppressHydrationWarning>
         {children}
       </body>
     </html>
