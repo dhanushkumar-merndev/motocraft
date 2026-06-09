@@ -52,7 +52,20 @@ export async function POST(request: NextRequest) {
     .limit(1);
 
   if (existingLeads.length > 0) {
-    // Lead already exists — return existing ID for resume upload only
+    // Lead exists — update info from website (resume handled separately)
+    await db
+      .update(leads)
+      .set({
+        fullName,
+        email,
+        positionApplyingFor,
+        department,
+        location: location === 'Yes' ? 'Bengaluru' : 'no',
+        campaignName: campaignName || 'collected via website',
+        updatedAt: new Date(),
+      })
+      .where(eq(leads.id, existingLeads[0].id));
+
     return success({ id: existingLeads[0].id }, 200);
   }
 
