@@ -261,7 +261,7 @@ export default function Home() {
     return (
       <div className="success-root">
         <div className="hero-panel">
-          <img src="/logo.png" alt="MotoCraft" className="hero-logo" />
+          <img src="/logo.png" alt="MotoCraft" className="hero-logo" width={676} height={340} />
           <div className="hero-tagline">Welcome Aboard!</div>
           <div className="hero-sub">
             Your application has been received and is being reviewed by our team.
@@ -291,7 +291,7 @@ export default function Home() {
     <div className="page-root" data-step={step}>
       {/* Desktop left hero side */}
       <div className="hero-panel">
-        <img src="/logo.png" alt="MotoCraft" className="hero-logo" />
+        <img src="/logo.png" alt="MotoCraft" className="hero-logo" width={676} height={340} />
         <div className="hero-tagline">Lead the Legacy.<br />Join the Ride.</div>
         <div className="hero-sub">
           Be part of a team that&apos;s redefining the two-wheeler experience. Your journey starts here.
@@ -332,11 +332,11 @@ export default function Home() {
           <div className="form-card">
             {/* Logo — mobile only */}
             <div className="mobile-logo">
-              <img src="/logo.png" alt="MotoCraft" />
+              <img src="/logo.png" alt="MotoCraft" width={676} height={340} />
             </div>
 
-          <div className="form-heading">
-            <h1>Apply at MotoCraft</h1>
+            <div className="form-heading">
+              <h1>Apply at MotoCraft</h1>
             <p className="mobile-only">Start your journey with us</p>
           </div>
 
