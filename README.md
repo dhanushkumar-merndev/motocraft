@@ -1,36 +1,93 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# MotoCraft Careers — Lead Collection Form
 
-## Getting Started
+A mobile-friendly web form that collects job applications directly into the MotoCraft PostgreSQL database. No sign-in required. Leads appear instantly in the Android app with `source = "website"`.
 
-First, run the development server:
+---
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+## Campaign Tracking
+
+Track which ad or channel each lead came from via URL parameters.
+
+### Supported Parameters (priority order)
+
+1. `campaign` — generic param for any source
+2. `utm_campaign` — standard UTM param (Facebook Ads, Google Ads, etc.)
+3. If neither is present → defaults to `"collected via website"`
+
+### Facebook Ads
+
+In Facebook Ads Manager, set the Website URL to:
+
+```
+https://motocraft-form.vercel.app/?utm_campaign={{campaign.name}}
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Facebook replaces `{{campaign.name}}` with the actual campaign name dynamically. Spaces and special characters are auto-decoded before storing in the database.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+**Examples of what gets stored:**
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+| URL                                    | Stored in DB             |
+| -------------------------------------- | ------------------------ |
+| `?campaign=fb_spring_2026`             | `fb_spring_2026`         |
+| `?utm_campaign=Spring Sale 2026`       | `Spring Sale 2026`       |
+| `?utm_campaign=FB%20-%20Service%20Ads` | `FB - Service Ads`       |
+| _(no param)_                          | `collected via website`  |
 
-## Learn More
+### Google Ads
 
-To learn more about Next.js, take a look at the following resources:
+Same approach — use the `utm_campaign` parameter:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+```
+https://motocraft-form.vercel.app/?utm_campaign={campaignid}
+```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+Google's `{campaignid}` dynamic parameter inserts the numeric campaign ID, or you can use a custom param with the campaign name.
 
-## Deploy on Vercel
+### Other Sources
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+Use the `campaign` param for any manual links, QR codes, email newsletters, etc.:
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+```
+https://motocraft-form.vercel.app/?campaign=qr_code_bengaluru
+https://motocraft-form.vercel.app/?campaign=email_newsletter_march
+```
+
+### Verify in Android App
+
+After a lead comes in via a tracked link, open the Android app → the lead's detail screen shows the `campaignName` field. You can filter leads by campaign in the dashboard.
+
+---
+
+## Resume Upload Flow
+
+1. Fill form + select resume (PDF, max 2 MB) → submit
+2. A presigned S3 upload URL is fetched and the file is uploaded directly
+3. The database is updated with the file reference
+4. Resume appears in the Android app's in-app PDF viewer
+
+---
+
+## Privacy
+
+Only the `campaign` / `utm_campaign` URL parameter is used — no cookies, no localStorage, no tracking pixels. Full disclosure in the [Privacy Policy](/privacy).
+
+---
+
+## Environment Variables
+
+| Variable          | Description                       |
+| ----------------- | --------------------------------- |
+| `WEBSITE_API_KEY` | Shared secret for API auth        |
+| `DATABASE_URL`    | PostgreSQL connection string      |
+| `AWS_ACCESS_KEY_ID`, `AWS_SECRET_ACCESS_KEY`, `AWS_REGION`, `S3_BUCKET_NAME` | S3 for resume storage |
+
+---
+
+## Development
+
+```bash
+npm install
+npm run dev
+```
+
+Opens at `http://localhost:3000`. Add `?campaign=test` or `?utm_campaign=test` to test tracking.

@@ -175,7 +175,7 @@ export default function Home() {
 
     try {
       const params = new URLSearchParams(window.location.search);
-      const campaignName = params.get("campaign") || "collected via website";
+      const campaignName = params.get("campaign") || params.get("utm_campaign") || "collected via website";
 
       const res = await fetch("/api/leads", {
         method: "POST",
