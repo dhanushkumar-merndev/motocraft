@@ -20,7 +20,7 @@ export default function PrivacyPolicy() {
           <IoChevronBack style={{ fontSize: "1rem" }} /> Back
         </Link>  
         <Link href="/" style={{ display: "flex", alignItems: "center", textDecoration: "none" }}>
-          <img src="/icon-foreground.png" alt="MotoCraft" className="privacy-logo" style={{ height: 36 }} />
+          <img src="/logo.png" alt="MotoCraft" className="privacy-logo" style={{ height: 40 }} />
         </Link>
       </header>
 
