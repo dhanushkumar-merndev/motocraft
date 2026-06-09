@@ -30,7 +30,11 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className="h-full antialiased" data-scroll-behavior="smooth">
-      <body className="min-h-full flex flex-col" style={{ background: "#080808", color: "#F5F2EE" }}>{children}</body>
+      <body className="min-h-full flex flex-col" style={{ background: "#080808", color: "#F5F2EE" }}>
+        <link rel="preload" as="image" href="/icon.png" />
+        <link rel="preload" as="image" href="/logo.png" />
+        {children}
+      </body>
     </html>
   );
 }
