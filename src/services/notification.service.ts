@@ -37,16 +37,6 @@ export async function sendNewLeadNotification(
 
   const messages = tokens.map(({ token }) => ({
     token,
-    notification: {
-      title: 'New Lead',
-      body: `${fullName} applied for ${positionLabel} via website`,
-    },
-    android: {
-      priority: 'high' as const,
-      notification: {
-        channelId: 'motocraft_leads_v4',
-      },
-    },
     data: {
       type: 'NEW_LEAD' as const,
       lead_id: leadId,
@@ -98,16 +88,6 @@ export async function sendResumeUploadNotification(
 
   const messages = tokens.map(({ token }) => ({
     token,
-    notification: {
-      title: 'Resume Uploaded',
-      body: `${fullName} uploaded resume via website`,
-    },
-    android: {
-      priority: 'high' as const,
-      notification: {
-        channelId: 'motocraft_leads_v4',
-      },
-    },
     data: {
       type: 'NEW_LEAD' as const,
       lead_id: leadId,
