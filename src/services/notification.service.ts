@@ -89,7 +89,7 @@ export async function sendResumeUploadNotification(
   const messages = tokens.map(({ token }) => ({
     token,
     data: {
-      type: 'NEW_LEAD' as const,
+      type: 'RESUME_UPLOAD' as const,
       lead_id: leadId,
       fullName,
       positionApplyingFor: position,
