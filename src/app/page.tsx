@@ -294,7 +294,8 @@ export default function Home() {
         <img src="/logo.png" alt="MotoCraft" className="hero-logo" width={676} height={340} />
         <div className="hero-tagline">Lead the Legacy.<br />Join the Ride.</div>
         <div className="hero-sub">
-          Be part of a team that&apos;s redefining the two-wheeler experience. Your journey starts here.
+          A Global Premium Motorcycle Brand is launching soon in Central Bangalore.
+    
         </div>
       </div>
 
