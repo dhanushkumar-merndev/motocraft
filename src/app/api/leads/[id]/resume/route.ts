@@ -29,7 +29,7 @@ export async function POST(
 
   try {
     const { lead, resumeUrl } = await confirmResumeUpload(id, parsed.data.fileKey);
-    if (parsed.data.isNew) {
+    if (!parsed.data.isNew) {
       console.log("[FCM] Triggering Resume notification...");
       await sendResumeUploadNotification(lead.id, lead.fullName ?? '', lead.positionApplyingFor ?? '').catch((e) => console.error("FCM resume error:", e));
     }
