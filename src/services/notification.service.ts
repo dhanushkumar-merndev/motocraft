@@ -45,7 +45,12 @@ export async function sendNewLeadNotification(
     },
     notification: {
       title: 'New Lead Received',
-      body: `${fullName} - ${positionLabel}`,
+      body: `${fullName} applied for ${positionLabel}`,
+    },
+    android: {
+      notification: {
+        channelId: 'motocraft_leads_v4',
+      },
     },
   }));
 
@@ -99,6 +104,11 @@ export async function sendResumeUploadNotification(
     notification: {
       title: 'Resume Upload',
       body: `${fullName} updated their resume`,
+    },
+    android: {
+      notification: {
+        channelId: 'motocraft_leads_v4',
+      },
     },
   }));
 
