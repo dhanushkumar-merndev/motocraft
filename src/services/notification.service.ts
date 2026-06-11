@@ -43,6 +43,10 @@ export async function sendNewLeadNotification(
       fullName,
       positionApplyingFor: position,
     },
+    notification: {
+      title: 'New Lead Received',
+      body: `${fullName} - ${positionLabel}`,
+    },
   }));
 
   console.log(`[FCM] NewLead: sending to ${tokens.length} tokens...`);
@@ -84,8 +88,6 @@ export async function sendResumeUploadNotification(
   const app = getFirebaseApp();
   const messaging = getMessaging(app);
 
-  const positionLabel = position.replace(/_/g, ' ').replace(/\b\w/g, (c) => c.toUpperCase());
-
   const messages = tokens.map(({ token }) => ({
     token,
     data: {
@@ -93,6 +95,10 @@ export async function sendResumeUploadNotification(
       lead_id: leadId,
       fullName,
       positionApplyingFor: position,
+    },
+    notification: {
+      title: 'Resume Upload',
+      body: `${fullName} updated their resume`,
     },
   }));
 
