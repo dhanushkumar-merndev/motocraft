@@ -234,6 +234,7 @@ export default function Home() {
       setSubmittedName(formData.fullName);
       setSuccess(true);
       showToast("Application submitted successfully!", "success");
+      try { fbq('track', 'Lead'); } catch {} // eslint-disable-line no-undef
     } catch {
       setServerError("Something went wrong. Please try again.");
       showToast("Something went wrong. Please try again.", "error");
