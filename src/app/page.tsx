@@ -39,6 +39,12 @@ type FormData = {
 
 type FormErrors = Partial<Record<keyof FormData, string>>;
 
+declare global {
+  interface Window {
+    fbq?: (...args: unknown[]) => void;
+  }
+}
+
 function formatFileSize(bytes: number): string {
   if (bytes < 1024) return `${bytes} B`;
   if (bytes < 1024 * 1024) return `${(bytes / 1024).toFixed(0)} KB`;
@@ -234,7 +240,7 @@ export default function Home() {
       setSubmittedName(formData.fullName);
       setSuccess(true);
       showToast("Application submitted successfully!", "success");
-      try { (window as any).fbq('track', 'Lead'); } catch {}
+      window.fbq?.("track", "Lead");
     } catch {
       setServerError("Something went wrong. Please try again.");
       showToast("Something went wrong. Please try again.", "error");
