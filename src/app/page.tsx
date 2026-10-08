@@ -13,15 +13,8 @@ import {
 } from "react-icons/io5";
 
 const POSITIONS = [
-  { label: "Sales Manager", value: "sales_manager" },
-  { label: "Sales Executive", value: "sales_executive" },
-  { label: "Test Rider", value: "test_rider" },
-  { label: "Receptionist", value: "receptionist" },
   { label: "Service Manager", value: "service_manager" },
-  { label: "Service Advisor", value: "service_advisor" },
   { label: "Technician", value: "technician" },
-  { label: "Parts Manager", value: "parts_manager" },
-  { label: "Parts Supervisor", value: "parts_supervisor" },
 ] as const;
 
 const LOCATIONS = [
